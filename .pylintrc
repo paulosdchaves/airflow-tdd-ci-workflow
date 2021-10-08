@@ -1,0 +1,9 @@
+[MESSAGES CONTROL]
+disable = C0330, C0326, C0114, missing-docstring, missing-module-docstring, missing-function-docstring,error1,error2
+
+[format]
+max-line-length = 88
+
+[BASIC]
+# Good variable names which should always be accepted, separated by a comma.
+good-names=i, j, k, ex, Run, df, l, l1, l2, l3
