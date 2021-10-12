@@ -35,10 +35,10 @@ services:
       - POSTGRES_PASSWORD=${SOURCE_PASSWORD}
       - POSTGRES_DB=${SOURCE_DB}
 
-  dw:
+  analytics-database:
     image: postgres:13.1
     restart: always
-    container_name: dw
+    container_name: analytics-database
     ports:
       - 54321:54321
     environment:

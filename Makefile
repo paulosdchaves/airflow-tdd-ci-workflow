@@ -6,6 +6,8 @@ PYTEST_ARGS := ""
 TAG := $(shell git rev-parse --short HEAD)
 ENVIRONMENT := dev
 
+include .env
+
 .venv:
 	@python3 -m venv .venv
 	@${VENV_PYTHON} -m pip install -U -q pip pip-tools
@@ -48,6 +50,18 @@ autoflake: install-deps
 .PHONY: format
 format: autoflake isort black
 
+.PHONY: setup
+setup:
+	docker-compose up -d --force-recreate --remove-orphans
+	sleep 240
+	docker exec airflow airflow users create --username admin --password admin --role Admin --firstname Paulo --lastname Chaves --email admin@email.com
+	docker exec airflow airflow connections add 'legacy' --conn-uri 'postgresql://root:root@legacy-database:5432/legacy'
+	docker exec airflow airflow connections add 'analytics' --conn-uri 'postgresql://root:root@analytics-database:5432/analytics'
+
+.PHONY: down
+down:
+	docker-compose down
+
 .PHONY: test
-test: lint update-components
-	@${VENV_PYTHON} -m pytest ${PYTEST_ARGS}
+test: lint
+	@${VENV_PYTHON} -m docker exec airflow pytest -v ${PYTEST_ARGS}
