@@ -1,0 +1,47 @@
+# Running Airflow in Docker (official documentation)
+# https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html
+
+version: "3.7"
+
+services:
+  airflow:
+    image: ${REPO}
+    container_name: airflow
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./sql:/opt/airflow/sql
+      - ./tests:/opt/airflow/tests
+      - ./data:/opt/airflow/data
+      - ./requirements.txt:/opt/airflow/requirements.txt
+    environment:
+      - AIRFLOW_HOME=/opt/airflow
+      - AIRFLOW__CORE__FERNET_KEY=${FERNET_KEY}
+      - AIRFLOW__CORE__EXECUTOR=${EXECUTOR}
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+      - AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS=false
+      - AIRFLOW__API__AUTH_BACKEND=${AIRFLOW_API_BACKEND}
+    ports:
+      - 8080:8080
+    command: 'bash -c "pip3 install -r requirements.txt && airflow db init && airflow webserver -D && airflow scheduler -D"'
+
+  legacy-database:
+    image: postgres:13.1
+    restart: always
+    container_name: legacy-database
+    ports:
+      - 54320:54320
+    environment:
+      - POSTGRES_USER=${SOURCE_USER}
+      - POSTGRES_PASSWORD=${SOURCE_PASSWORD}
+      - POSTGRES_DB=${SOURCE_DB}
+
+  dw:
+    image: postgres:13.1
+    restart: always
+    container_name: dw
+    ports:
+      - 54321:54321
+    environment:
+      - POSTGRES_USER=${DEST_USER}
+      - POSTGRES_PASSWORD=${DEST_PASSWORD}
+      - POSTGRES_DB=${DEST_DB}
