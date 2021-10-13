@@ -22,11 +22,11 @@ isort-check: install-deps
 
 .PHONY: black-check
 black-check: install-deps
-	@${VENV_PYTHON} -m black . --exclude=.cookiecutters
+	@${VENV_PYTHON} -m black .
 
 .PHONY: autoflake-check
 autoflake-check: install-deps
-	@${VENV_PYTHON} -m autoflake -c --remove-unused-variables --remove-all-unused-imports -r bigquery_utils credentials_utils datastore_utils pubsub_utils main.py functions tests &> /dev/null
+	@${VENV_PYTHON} -m autoflake -c --remove-unused-variables --remove-all-unused-imports -r dags tests &> /dev/null
 
 .PHONY: mypy
 mypy: install-deps
@@ -41,11 +41,11 @@ isort: install-deps
 
 .PHONY: black
 black: install-deps
-	@${VENV_PYTHON} -m black . --exclude=.cookiecutters
+	@${VENV_PYTHON} -m black .
 
 .PHONY: autoflake
 autoflake: install-deps
-	@${VENV_PYTHON} -m autoflake --remove-unused-variables --remove-all-unused-imports -i -r -r bigquery_utils credentials_utils datastore_utils pubsub_utils main.py functions tests
+	@${VENV_PYTHON} -m autoflake --remove-unused-variables --remove-all-unused-imports -i -r -r dags tests
 
 .PHONY: format
 format: autoflake isort black
@@ -63,5 +63,5 @@ down:
 	docker-compose down
 
 .PHONY: test
-test: lint
-	@${VENV_PYTHON} -m docker exec airflow pytest -v ${PYTEST_ARGS}
+test: format lint
+	docker exec airflow pytest -v ${PYTEST_ARGS}

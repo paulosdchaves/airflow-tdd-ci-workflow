@@ -1,4 +1,9 @@
+black
+isort
+mypy
+autoflake
 pytest
+pytest-cov
 sqlAlchemy
 pandas
 psycopg2-binary
