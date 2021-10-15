@@ -2,6 +2,8 @@
 (project &amp; tutorial) dag using TDD + tests + ci/cd setup
 
 [![CI](https://github.com/paulosdchaves/airflow-tdd-ci-workflow/workflows/CI/badge.svg?branch=master)](https://github.com/paulosdchaves/airflow-tdd-ci-workflow/actions?query=workflow:CI)
+[![codecov](https://codecov.io/gh/paulosdchaves/airflow-tdd-ci-workflow/branch/master/graph/badge.svg?token=8Y7DZOLY60)](https://codecov.io/gh/paulosdchaves/airflow-tdd-ci-workflow)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## The project
 
