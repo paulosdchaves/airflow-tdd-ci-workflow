@@ -31,5 +31,5 @@ Ao executar o comando acima, é possível acessar o Airflow em `localhost: 8080`
 Um usuário de testes é criado user: admin / password: admin.
 O comando abaixo roda os testes:
 ```bash
-make testing
+make test
 ```
