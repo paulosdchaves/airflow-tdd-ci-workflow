@@ -2,6 +2,8 @@ black
 isort
 mypy
 autoflake
+coverage
+codecov
 pytest
 pytest-cov
 sqlAlchemy

@@ -16,4 +16,9 @@ jobs:
     - name: Create airflow env
       run: make setup
     - name: Run tests
-      run: make test
+      run: make test      
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        flags: unittests
+        fail_ci_if_error: true

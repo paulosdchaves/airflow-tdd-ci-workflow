@@ -64,4 +64,4 @@ down:
 
 .PHONY: test
 test: format lint
-	docker exec airflow pytest -v ${PYTEST_ARGS}
+	docker exec airflow pytest -v --cov-report xml --cov tests/ ${PYTEST_ARGS}
