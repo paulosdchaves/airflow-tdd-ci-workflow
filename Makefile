@@ -65,3 +65,6 @@ down:
 .PHONY: test
 test: format lint
 	docker exec airflow pytest --cov=./ --cov-report=xml ${PYTEST_ARGS}
+	docker cp airflow:/opt/airflow/coverage.xml .
+	docker cp airflow:/opt/airflow/.coverage .
+	
