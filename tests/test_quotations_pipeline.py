@@ -2,6 +2,7 @@ import subprocess
 
 import pandas as pd
 from airflow.providers.postgres.hooks.postgres import PostgresHook
+from pandas._testing import assert_frame_equal
 
 
 def execute_dag(dag_id, execution_date):
@@ -51,3 +52,6 @@ class TestQuotationsPipeline:
 
         analytics_product_size = analytics_hook.get_records("select * from products")
         assert len(analytics_product_size) == 2
+
+        analytics_product_data = analytics_hook.get_pandas_df("select * from products")
+        assert_frame_equal(analytics_product_data, sample_data)
