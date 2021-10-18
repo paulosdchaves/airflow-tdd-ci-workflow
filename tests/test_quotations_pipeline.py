@@ -17,10 +17,10 @@ class TestQuotationsPipeline:
         legacy_hook.run(
             """
         CREATE TABLE IF NOT EXISTS products (
-            planSelected_id          INTEGER,
-            planSelected_name        TEXT,
-            reportedCapitalValue     INTEGER,
-            insurancePremium_annual  INTEGER
+            planselected_id          INTEGER,
+            planselected_name        TEXT,
+            reportedcapitalvalue     INTEGER,
+            insurancepremium_annual  INTEGER
         );
         """
         )
@@ -38,10 +38,10 @@ class TestQuotationsPipeline:
         analytics_hook.run(
             """
         CREATE TABLE IF NOT EXISTS products (
-            planSelected_id          INTEGER,
-            planSelected_name        TEXT,
-            reportedCapitalValue     INTEGER,
-            insurancePremium_annual  INTEGER
+            planselected_id          INTEGER,
+            planselected_name        TEXT,
+            reportedcapitalvalue     INTEGER,
+            insurancepremium_annual  INTEGER
         );
         """
         )
